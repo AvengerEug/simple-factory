@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eugene.model.OrderFlowOperation">
+
+    <cache type="com.eugene.common.cache.RedisCache"/>
+
+    <resultMap type="OrderFlowOperation" id="orderFlowOperationMap">
+        <id column="order_flow_operation" property="orderFlowOperation"/>
+        <result column="name" property="name"/>
+        <result column="order_status" property="orderStatus" typeHandler="com.eugene.dao.mybatis.typehandler.OrderStatusTypeHandler" />
+        <result column="payment_type" property="paymentType" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+        <result column="next_executable_operation" property="nextExecutableOperation"/>
+        <result column="next_changeable_status" property="nextChangeableStatus"/>
+    </resultMap>
+
+    <resultMap type="com.eugene.dto.OrderFlowOperationDTO" id="orderFlowOperationDTOMap" extends="orderFlowOperationMap">
+        <result column="next_executable_operation" property="nextExecutableOperationList" typeHandler="com.eugene.dao.mybatis.typehandler.NextExecutableOperationEnumTypeHandler"/>
+        <result column="next_changeable_status" property="nextChangeableStatusList" typeHandler="com.eugene.dao.mybatis.typehandler.NextChangeableStatusEnumTypeHandler"/>
+    </resultMap>
+
+    <select id="findOrderFlowOperationDTOByPaymentType" parameterType="int" resultMap="orderFlowOperationDTOMap">
+        <![CDATA[
+            SELECT * FROM order_flow_operation WHERE payment_type = #{parameter}
+        ]]>
+    </select>
+</mapper>
