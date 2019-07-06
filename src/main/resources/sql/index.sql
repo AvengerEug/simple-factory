@@ -9,7 +9,6 @@ CREATE TABLE order_flow_operation(
   next_changeable_status VARCHAR(100) COMMENT "存储order status enum的value, 用,隔开"
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 INSERT INTO order_flow_operation(name, order_status, payment_type, next_executable_operation, next_changeable_status) VALUES
 ("待接单", 0, 0, "0,1,2,3", "1,2,4,3"),
 ("拒绝接单", 1, 0, null, null),
@@ -26,3 +25,13 @@ INSERT INTO order_flow_operation(name, order_status, payment_type, next_executab
 ("待发货", 5, 1, "7", "7"),
 ("待对账还款", 7, 1, "11", "10"),
 ("完成", 10, 1, null, null);
+
+CREATE TABLE orders(
+  order_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  status TINYINT(1),
+  price DECIMAL(7, 2) COMMENT "总共能存7位数字(所以最大订单价格为百万级别)",
+  payment_type TINYINT(1) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO orders(status, price, payment_type) VALUES(0, 21442.12, 0);
+INSERT INTO orders(status, price, payment_type) VALUES(0, 44587.89, 1);

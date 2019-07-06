@@ -1,37 +1,31 @@
 package com.eugene.controller;
 
+import com.eugene.Enum.OrderStatusEnum;
 import com.eugene.Enum.PaymentTypeEnum;
+import com.eugene.common.controller.BaseController;
+import com.eugene.common.exception.BusinessException;
+import com.eugene.common.web.http.Message;
 import com.eugene.dao.OrderFlowOperationDAO;
 import com.eugene.dto.OrderFlowOperationDTO;
+import com.eugene.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/v1/orders")
-public class OrdersController {
-
-    /*@Autowired
-    private List<OrderFlowOperationDTO> accountOrderFlowOperations;
+public class OrdersController extends BaseController {
 
     @Autowired
-    private List<OrderFlowOperationDTO> securedOrderFlowOperations;*/
+    private OrderService orderService;
 
-
-    @Autowired
-    private OrderFlowOperationDAO orderFlowOperationDAO;
-
-    @GetMapping(value = "/hello")
-    public String hello() {
-        /*for (OrderFlowOperationDTO orderFlowOperationDTO : accountOrderFlowOperations) {
-            System.out.printf(orderFlowOperationDTO.toString());
-        }
-
-        for (OrderFlowOperationDTO ordeOrderFlowOperationMapperrFlowOperationDTO : securedOrderFlowOperations) {
-            System.out.printf(orderFlowOperationDTO.toString());
-        }*/
-        orderFlowOperationDAO.findOrderFlowOperationDTOByPaymentType(PaymentTypeEnum.ACCOUNT);
-        return "123";
+    @PutMapping(value = "/update-status/{orderId}")
+    public Message updateOrderStatus(
+            @PathVariable(value = "orderId") Long orderId,
+            @RequestParam(value = "status") OrderStatusEnum status) throws BusinessException {
+        orderService.updateOrderStatus(status, orderId);
+        return Message.ok();
     }
 }

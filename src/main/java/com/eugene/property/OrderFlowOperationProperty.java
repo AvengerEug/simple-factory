@@ -13,13 +13,13 @@ public class OrderFlowOperationProperty {
     @Autowired
     private OrderFlowOperationDAO orderFlowOperationDAO;
 
-    @Bean(value = "accountOrderFlowOperations")
-    public List<OrderFlowOperationDTO> initAccountOrderFlowOperations() {
+    @Bean
+    public List<OrderFlowOperationDTO> accountOrderFlowOperations() {
         return orderFlowOperationDAO.findOrderFlowOperationDTOByPaymentType(PaymentTypeEnum.ACCOUNT);
     }
 
-    @Bean(value = "securedOrderFlowOperations")
-    public List<OrderFlowOperationDTO> initSecuredOrderFlowOperations() {
+    @Bean
+    public List<OrderFlowOperationDTO> securedOrderFlowOperations() {
         return orderFlowOperationDAO.findOrderFlowOperationDTOByPaymentType(PaymentTypeEnum.SECURED);
     }
 }

@@ -5,12 +5,17 @@ import com.eugene.exception.OrderOperationException;
 import com.eugene.handler.RefusedOperate;
 import com.eugene.handler.ToConfirmOperate;
 import com.eugene.Enum.OrderStatusEnum;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderOperationFactory {
 
-    private ToConfirmOperate toConfirmOperate = new ToConfirmOperate();
+    @Autowired
+    private ToConfirmOperate toConfirmOperate;
 
-    private RefusedOperate refusedOperate = new RefusedOperate();
+    @Autowired
+    private RefusedOperate refusedOperate;
 
     /**
      * 根据订单要更新的状态 返回对应的处理器
