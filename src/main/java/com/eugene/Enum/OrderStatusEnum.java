@@ -25,7 +25,6 @@ public enum OrderStatusEnum {
     CLOSED(4), // 已关闭
     TO_SHIP(5), // 待发货
     TO_ACCEPT(6), //待收货
-    //RECONCILIATION_REPAYMENT(7), //待对账还款
     FINISHED(10); //完成
 
     private int value;

@@ -46,9 +46,9 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException("订单不存在");
         }
 
-        logger.info("更新订单: 验证是否为合法操作, 当前交易类型为: [ " + order.getPaymentType() + " ]");
+        logger.info("更新订单: 验证是否为合法操作, 当前交易类型为: [ {} ]", order.getPaymentType());
         if (!checkIsValidOperation(order, status)) {
-            logger.error("更新订单: 不允许从 [ " + order.getStatus() + " ] 状态更新成 [ " + status + " ]");
+            logger.error("更新订单: 不允许从 [ {} ]  状态更新成 [ {} ]", order.getStatus(), status);
             throw new BusinessException("非法操作");
         }
 

@@ -23,7 +23,7 @@ public class ToConfirmOperate implements OrderStatusHandler {
             logger.info("更新订单: 处理卖家接单逻辑");
             Order order = (Order)object;
             orderDAO.updateStatus(order.getOrderId(), order.getStatus());
-            logger.info("更新订单: 更新成功" );
+            logger.info("更新订单: 更新成功, 发布一个下单成功的事件" );
         }
     }
 }

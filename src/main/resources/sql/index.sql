@@ -1,5 +1,7 @@
 CREATE DATABASE order_flow;
 
+USE order_flow;
+
 CREATE TABLE order_flow_operation(
   order_flow_operation_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
