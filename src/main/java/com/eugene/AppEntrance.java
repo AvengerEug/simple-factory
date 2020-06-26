@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
+import com.eugene.common.annotation.EnableFilters;
 
 /**
  * 简单工厂处理订单流程demo.
@@ -20,6 +21,7 @@ import java.util.concurrent.Executor;
 @Import(value = {RedisTemplateConfiguration.class})
 @EnableCors
 @EnableAsync
+@EnableFilters
 public class AppEntrance {
 
     public static void main(String[] args) {
